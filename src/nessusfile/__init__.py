@@ -144,7 +144,10 @@ class NessusHost(NessusElement):
     @property
     def fqdn(self):
 
-        return self.properties['host-fqdn']
+        try:
+            return self.properties['host-fqdn']
+        except KeyError:
+            return None
     
     @property
     def ip_address(self):
