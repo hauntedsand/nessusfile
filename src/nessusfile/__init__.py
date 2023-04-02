@@ -6,6 +6,8 @@ support reading, not altering. Some fields are not represented on the models.
 
 """
 
+import ipaddress
+
 from .errors import NoMatchesError
 from lxml.etree import parse as parse_xml
 
@@ -138,6 +140,16 @@ class NessusHost(NessusElement):
     def __repr__(self):
 
         return f"<NessusHost {{name='{self.name}'}}>"
+
+    @property
+    def fqdn(self):
+
+        return self.properties['host-fqdn']
+    
+    @property
+    def ip_address(self):
+
+        return ipaddress.ip_address(self.properties['host-ip'])
 
     @property
     def name(self):
