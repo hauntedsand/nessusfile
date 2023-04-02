@@ -143,9 +143,15 @@ class NessusHost(NessusElement):
     def name(self):
 
         return self._attributes['name']
-    
+
     @property
     def properties(self):
+
+        return {property.name: property.value
+            for property in self.properties_list}
+    
+    @property
+    def properties_list(self):
 
         return [
             NessusHostProperty(element)
